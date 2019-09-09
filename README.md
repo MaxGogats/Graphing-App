@@ -1,2 +1,2 @@
 # graphicApp
-Simple Custom Graphing App for Android 
+Simple Custom Graphing App for iOS
