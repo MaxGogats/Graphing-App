@@ -12,6 +12,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.ImageView;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
 
@@ -23,10 +25,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     MySurface customSurfaceView = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         setTitle("Falling Meteor Game");
 
@@ -51,15 +57,27 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fallingMeteor();
+                startGame.setVisibility(View.GONE);
+                fallingGrades();
             }
         });
 
     }
 
     /*Create falling meteors*/
-    private void fallingMeteor(){
+    private void fallingGrades(){
+        final ImageView aGrade = findViewById(R.id.aImage);
+        final ImageView bGrade = findViewById(R.id.bImage);
+        final ImageView cGrade = findViewById(R.id.cImage);
+        final ImageView fGrade = findViewById(R.id.fImage);
 
+        Random randX = new Random();
+        float rand_float = randX.nextInt(customSurfaceView.getMeasuredWidth());
+        aGrade.setX(rand_float);
+
+
+
+        //startGame.setVisibility(View.VISIBLE);
     }
 
     /* Initialise ui controls. */
