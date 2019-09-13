@@ -5,8 +5,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
+import android.media.Image;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+import android.view.View;
+import android.widget.ImageView;
+
+import java.util.Random;
 
 /**
  * Created by zhaosong on 2018/6/16.
@@ -48,6 +56,7 @@ public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
         this.setZOrderOnTop(true);
 
         this.getHolder().setFormat(PixelFormat.TRANSLUCENT);
+
     }
 
     @Override
@@ -80,26 +89,23 @@ public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
         // Draw the circle.
         canvas.drawCircle(circleX, circleY, 50, paint);
 
+
         // Unlock the canvas object and post the new draw.
         surfaceHolder.unlockCanvasAndPost(canvas);
+
+        fallingDots();
     }
 
-    /* This method will be invoked to draw a circle in canvas.
-    public void drawRect()
-    {
-        Canvas canvas = surfaceHolder.lockCanvas();
-
-        Paint surfaceBackground = new Paint();
+    public void fallingDots(){
+        //Canvas canvas1 = surfaceHolder.lockCanvas();
+        //Paint surfaceBackground = new Paint();
         // Set the surfaceview background color.
-        surfaceBackground.setColor(Color.BLUE);
+        //surfaceBackground.setColor(Color.WHITE);
         // Draw the surfaceview background color.
-        canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), surfaceBackground);
+        //canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), surfaceBackground);
 
-        // Draw the rectangle.
-        canvas.drawRect(circleX, circleY, circleX + 100, circleY + 100, paint);
-
-        surfaceHolder.unlockCanvasAndPost(canvas);
-    }*/
+        //canvas.drawCircle(circleX, circleY, 200, paint);
+    }
 
     public float getCircleX() {
         return circleX;

@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     MySurface customSurfaceView = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,14 +65,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     /*Create falling meteors*/
     private void fallingGrades(){
-        final ImageView aGrade = findViewById(R.id.aImage);
-        final ImageView bGrade = findViewById(R.id.bImage);
-        final ImageView cGrade = findViewById(R.id.cImage);
-        final ImageView fGrade = findViewById(R.id.fImage);
+        //final ImageView aGrade = findViewById(R.id.aImage);
+        //final ImageView bGrade = findViewById(R.id.bImage);
+        //final ImageView cGrade = findViewById(R.id.cImage);
+        //final ImageView fGrade = findViewById(R.id.fImage);
 
         Random randX = new Random();
         float rand_float = randX.nextInt(customSurfaceView.getMeasuredWidth());
-        aGrade.setX(rand_float);
+       // aGrade.setX(rand_float);
 
 
 
