@@ -14,15 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
+    private LinearLayout customViewLayout = null;
     private Button startGame = null;
-
-    private boolean drawBall = true;
-
-    private LinearLayout canvasLayout = null;
-
-    MySurface customSurfaceView = null;
+    MySurface mySurface = null;
+    public boolean drawGraph = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,43 +28,31 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         initControls();
 
-        // Hide the app title bar.
-        getSupportActionBar().hide();
-
-        // Make app full screen to hide top status bar.
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // Create custom surfaceview object.
-        customSurfaceView = new MySurface(getApplicationContext());
+        MySurface mySurface = new MySurface(getApplicationContext());
 
-        // Set this as the onTouchListener to process custom surfaceview ontouch event.
-        customSurfaceView.setOnTouchListener(this);
+        mySurface.setOnTouchListener(this);
 
-        // Add the custom surfaceview object to the layout.
-        canvasLayout.addView(customSurfaceView);
+        customViewLayout.addView(mySurface);
 
-        // Click this button to draw a green rectangle move after finger touch.
         startGame.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View view) {
-                startGame.setVisibility(View.GONE);
+                drawGraph = false;
             }
         });
 
+
     }
 
-    /* Initialise ui controls. */
-    private void initControls()
-    {
-        if(startGame == null)
-        {
-            startGame = (Button)findViewById(R.id.startGame);
+    public void initControls() {
+        if (customViewLayout == null) {
+            customViewLayout = (LinearLayout) findViewById(R.id.customViewLayout);
         }
 
-        // This layout is used to contain custom surfaceview object.
-        if(canvasLayout == null)
-        {
-            canvasLayout = (LinearLayout)findViewById(R.id.customViewLayout);
+        if (startGame == null) {
+            startGame = findViewById(R.id.startGame);
         }
     }
 

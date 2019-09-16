@@ -14,7 +14,7 @@ import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.ImageView;
-
+import android.graphics.Path;
 import java.util.Random;
 
 public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
@@ -22,10 +22,6 @@ public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder surfaceHolder = null;
 
     private Paint paint = null;
-
-    private float circleX = 0;
-
-    private float circleY = 0;
 
     public MySurface(Context context) {
         super(context);
@@ -39,26 +35,20 @@ public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
             surfaceHolder.addCallback(this);
         }
 
-        if(paint == null)
-        {
-            paint = new Paint();
-
-            paint.setColor(Color.RED);
-        }
-
         // Set the parent view background color. This can not set surfaceview background color.
-        this.setBackgroundColor(Color.BLUE);
+        this.setBackgroundColor(Color.WHITE);
 
         // Set current surfaceview at top of the view tree.
         this.setZOrderOnTop(true);
 
         this.getHolder().setFormat(PixelFormat.TRANSLUCENT);
 
+
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        drawBall();
+        drawGraph();
     }
 
     @Override
@@ -71,55 +61,37 @@ public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-    /* This method will be invoked to draw a circle in canvas.*/
-    public void drawBall()
-    {
-        // Get and lock canvas object from surfaceHolder.
-        Canvas canvas = surfaceHolder.lockCanvas();
-
-        Paint surfaceBackground = new Paint();
-        // Set the surfaceview background color.
-        surfaceBackground.setColor(Color.WHITE);
-        // Draw the surfaceview background color.
-        canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), surfaceBackground);
-
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.MAGENTA);
-
-        Rect r = new Rect(
-                getLeft()+(getRight()-getLeft())/3,
-                getTop()+(getBottom()-getTop())/3,
-                getRight()-(getRight()-getLeft())/3,
-                getBottom()-(getBottom()-getTop())/3);
-
-        paint.setColor(Color.WHITE);
-        canvas.drawRect(r, paint);
-
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.BLACK);
-        canvas.drawRect(r, paint);
+    public void drawGraph() {
+        float startX = 0;
+        float startY = 100;
+        float stopX = 10000;
+        float stopY = 10000;
 
 
+        if(surfaceHolder.getSurface().isValid()){
+            Canvas canvas = surfaceHolder.lockCanvas();
+            Paint paint = new Paint();
+            paint.setColor(Color.BLACK);
 
-        // Unlock the canvas object and post the new draw.
-        surfaceHolder.unlockCanvasAndPost(canvas);
+            canvas.drawLine(startX, startY, stopX, stopY, paint);
+
+            surfaceHolder.unlockCanvasAndPost(canvas);
+
+        }
+
     }
 
-    public float getCircleX() {
-        return circleX;
-    }
+    public void drawCircle(){
+        if(surfaceHolder.getSurface().isValid()){
+            Canvas canvas = surfaceHolder.lockCanvas();
+            Paint paint = new Paint();
+            paint.setColor(Color.BLACK);
 
-    public void setCircleX(float circleX) {
-        this.circleX = circleX;
-    }
+            canvas.drawCircle(10, 10, 100, paint);
 
-    public float getCircleY() {
-        return circleY;
-    }
+            surfaceHolder.unlockCanvasAndPost(canvas);
 
-    public void setCircleY(float circleY) {
-        this.circleY = circleY;
+        }
     }
 
     public Paint getPaint() {
