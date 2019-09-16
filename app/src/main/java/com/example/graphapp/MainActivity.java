@@ -1,5 +1,4 @@
 package com.example.graphapp;
-
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
@@ -30,11 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-        setTitle("Falling Meteor Game");
-
         initControls();
 
         // Hide the app title bar.
@@ -57,26 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void onClick(View view) {
                 startGame.setVisibility(View.GONE);
-                fallingGrades();
             }
         });
 
-    }
-
-    /*Create falling meteors*/
-    private void fallingGrades(){
-        //final ImageView aGrade = findViewById(R.id.aImage);
-        //final ImageView bGrade = findViewById(R.id.bImage);
-        //final ImageView cGrade = findViewById(R.id.cImage);
-        //final ImageView fGrade = findViewById(R.id.fImage);
-
-        Random randX = new Random();
-        float rand_float = randX.nextInt(customSurfaceView.getMeasuredWidth());
-       // aGrade.setX(rand_float);
-
-
-
-        //startGame.setVisibility(View.VISIBLE);
     }
 
     /* Initialise ui controls. */
@@ -98,31 +75,5 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
-        // If user touch the custom SurfaceView object.
-        if(view instanceof SurfaceView) {
-
-            float x = motionEvent.getX();
-
-            float y = motionEvent.getY();
-
-            customSurfaceView.setCircleX(x);
-
-            customSurfaceView.setCircleY(y);
-
-            if (drawBall) {
-                // Create and set a red paint to custom surfaceview.
-                Paint paint = new Paint();
-                paint.setColor(Color.RED);
-                customSurfaceView.setPaint(paint);
-
-                customSurfaceView.drawBall();
-            }
-            // Tell android os the onTouch event has been processed.
-            return true;
-        }else
-        {
-            // Tell android os the onTouch event has not been processed.
-            return false;
-        }
     }
 }

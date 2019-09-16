@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.media.Image;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -15,10 +16,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.util.Random;
-
-/**
- * Created by zhaosong on 2018/6/16.
- */
 
 public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -86,25 +83,27 @@ public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
         // Draw the surfaceview background color.
         canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), surfaceBackground);
 
-        // Draw the circle.
-        canvas.drawCircle(circleX, circleY, 50, paint);
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.MAGENTA);
+
+        Rect r = new Rect(
+                getLeft()+(getRight()-getLeft())/3,
+                getTop()+(getBottom()-getTop())/3,
+                getRight()-(getRight()-getLeft())/3,
+                getBottom()-(getBottom()-getTop())/3);
+
+        paint.setColor(Color.WHITE);
+        canvas.drawRect(r, paint);
+
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.BLACK);
+        canvas.drawRect(r, paint);
+
 
 
         // Unlock the canvas object and post the new draw.
         surfaceHolder.unlockCanvasAndPost(canvas);
-
-        fallingDots();
-    }
-
-    public void fallingDots(){
-        //Canvas canvas1 = surfaceHolder.lockCanvas();
-        //Paint surfaceBackground = new Paint();
-        // Set the surfaceview background color.
-        //surfaceBackground.setColor(Color.WHITE);
-        // Draw the surfaceview background color.
-        //canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), surfaceBackground);
-
-        //canvas.drawCircle(circleX, circleY, 200, paint);
     }
 
     public float getCircleX() {
