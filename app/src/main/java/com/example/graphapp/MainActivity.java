@@ -1,4 +1,6 @@
 package com.example.graphapp;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity  {
 
     BarChart barChart;
 
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,8 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
         barChart = (BarChart) findViewById(R.id.barGraph);
+        Button toLine = (Button)findViewById(R.id.toLine);
+
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         ArrayList<String[]> hrData = new ArrayList<>();
         File file = null;
@@ -88,26 +94,38 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-        entries.add(new BarEntry(.5f, hrNumber.get(0)));
-        entries.add(new BarEntry(1.5f, hrNumber.get(1)));
-        entries.add(new BarEntry(2.5f, hrNumber.get(2)));
-        entries.add(new BarEntry(3.5f, hrNumber.get(3)));
-        entries.add(new BarEntry(4.5f, hrNumber.get(4)));
+        entries.add(new BarEntry(0f, hrNumber.get(0)));
+        entries.add(new BarEntry(1, hrNumber.get(1)));
+        entries.add(new BarEntry(2, hrNumber.get(2)));
+        entries.add(new BarEntry(3f, hrNumber.get(3)));
+        entries.add(new BarEntry(4f, hrNumber.get(4)));
 
 
-        BarDataSet set = new BarDataSet(entries, "HomeRun Leaders");
+        BarDataSet set = new BarDataSet(entries, "Players");
         BarData theData = new BarData(set);
 
-        barChart.getDescription().setText("2019 Homerun Leaders");
+        barChart.getDescription().setText("");
+        barChart.getDescription().setPosition(750, 1000);
+        barChart.getDescription().setTextSize(15);
 
 
+        barChart.getXAxis().setGranularity(1);
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(names));
+        XAxis xax = barChart.getXAxis();
+        xax.setDrawGridLines(false);
 
         theData.setBarWidth(0.9f);
         barChart.setData(theData);
 
 
 
+       toLine.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent i = new Intent(getApplicationContext(), juicedballs.class);
+                startActivity(i);
+            }
+        });
 
         /*
         List<BarEntry> entries = new ArrayList<>();
