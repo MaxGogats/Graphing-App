@@ -82,24 +82,6 @@ public class juicedballs extends AppCompatActivity {
         ArrayList<Integer> hrNum = new ArrayList<>();
         File file = null;
 
-        /*
-        entries.add(new Entry(0, 1));
-        entries.add(new Entry(1, 2));
-        entries.add(new Entry(2, 5));
-
-        LineDataSet lineDataSet = new LineDataSet(entries, "Data");
-
-
-        LineData data = new LineData(lineDataSet);
-
-        lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-        lineDataSet.setHighlightEnabled(true);
-        lineDataSet.setLineWidth(2);
-
-        lineChart.setData(data);*/
-
-
-
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("juiced")));
             String line;
